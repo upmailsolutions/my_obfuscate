@@ -29,7 +29,7 @@ class MyObfuscate
       if regex_match = /^\s*COPY (.*?) \((.*?)\) FROM\s*/i.match(line)
         {
             :table_name => regex_match[1].to_sym,
-            :column_names => regex_match[2].split(/\s*,\s*/).map(&:to_sym)
+            :column_names => regex_match[2].split(/\s*,\s*/).map{ |c| c.gsub("\"", "") }.map(&:to_sym)
         }
       end
     end
